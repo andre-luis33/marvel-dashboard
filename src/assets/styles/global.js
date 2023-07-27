@@ -5,7 +5,7 @@ export default createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: sans-serif;
+		font-family: Epilogue, sans-serif;
 	}
 
    img {
@@ -21,8 +21,11 @@ export default createGlobalStyle`
       background-color: ${({ theme }) => theme.colors.backgroundColor };
    }
 
+
    button {
       cursor: pointer;
+      border: 0;
+      background-color: transparent;
    }
 
    button[disabled] {
