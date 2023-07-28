@@ -2,24 +2,25 @@ import styled from 'styled-components';
 
 export const PageWrapper = styled.main`
 	background-color: ${({ theme }) => theme.colors.blue[800]};
-	height: 100vh;
+	min-height: 100vh;
 
-	padding: 49px 68px 49px 68px;
-
+	padding: 49px 68px;
 
 	.content {
 		display: flex;
 		align-items: flex-end;
-		column-gap: 140px;
+		column-gap: 10%;
 		justify-content: center;
 		
 		padding-left: 49px;
 
-		& > img {
-			max-width: 45%;
+		.image-wrapper {
+			max-width: 615px;
 		}
+		
+		.card-wrapper {
+			max-width: 400px;
 
-		.login-wrapper {
 			background-color: ${({ theme }) => theme.colors.white};
 
 			padding: 49px 38px;
@@ -51,7 +52,7 @@ export const PageWrapper = styled.main`
 				input {
 					height: 57px;
 					width: 100%;
-					padding: 0 15px;
+					padding: 0 40px 0 15px;
 	
 					border-radius: 10px;
 					border: 1px solid #b7b7b7;
@@ -60,6 +61,8 @@ export const PageWrapper = styled.main`
 					font-size: 1rem;
 					font-weight: bold;
 					color: ${({ theme }) => theme.colors.blue[800]};
+
+					transition: border-color .1s;
 					
 					&::placeholder {
 						font-weight: normal;
@@ -67,7 +70,6 @@ export const PageWrapper = styled.main`
 
 					&:focus {
 						border-color: ${({ theme }) => theme.colors.blue[600]};
-
 					}
 				}
 				
@@ -118,6 +120,46 @@ export const PageWrapper = styled.main`
 				color: ${({ theme }) => theme.colors.orange[500]};
 				font-size: .8rem;
 			}	
+		}
+	}
+
+	
+	@media(max-width: 1000px) {
+		padding-inline: 40px;
+
+		.content {
+			column-gap: 5%;
+			padding-left: 0;
+		}
+	}
+
+	@media(max-width: 768px) {
+		padding-inline: 20px;
+
+		.content {
+			align-items: center;
+			margin-top: 15px;
+
+			.image-wrapper {
+				position: absolute;
+				z-index: 1;
+				bottom: 0px;
+				right: 0px;
+				opacity: .8;
+
+				max-width: 230px;
+			}
+
+			.card-wrapper {
+				position: relative;
+				z-index: 2;
+
+				padding: 30px 20px;
+
+				.title {
+					font-size: 1.8rem;
+				}
+			}
 		}
 	}
 `;

@@ -19,9 +19,11 @@ export default function Login() {
 			<img src={logoLight} alt="Logo Pontua" />
 
 			<div className="content">
-				<img src={building} alt="Prédio Colorido" />
+				<div className="image-wrapper">
+					<img src={building} alt="Prédio Colorido" />
+				</div>
 
-				<div className="login-wrapper">
+				<div className="card-wrapper">
 					<h1 className="title">
 						Bem-vindo<span className='dot'>.</span>
 					</h1>
