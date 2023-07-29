@@ -8,7 +8,7 @@ export const PageWrapper = styled.main`
 
 	.content {
 		display: flex;
-		align-items: flex-end;
+		align-items: flex-start;
 		column-gap: 10%;
 		justify-content: center;
 		
@@ -20,6 +20,7 @@ export const PageWrapper = styled.main`
 		
 		.card-wrapper {
 			max-width: 450px;
+			margin-top: 50px;
 
 			background-color: ${({ theme }) => theme.colors.white};
 
@@ -94,6 +95,30 @@ export const PageWrapper = styled.main`
 					background-color: transparent;
 				}
 
+			}
+
+			.error-message {
+				margin-bottom: 10px;
+				padding: 5px 10px;
+				
+				border-left: 4px solid red;
+				border-radius: 0 10px 10px 0;
+
+				color: red;
+				background-color: rgba(255,0,0, .2);
+
+				transition: all .5s;
+
+				opacity: 0;
+				visibility: hidden;
+				position: absolute;
+			}
+
+			
+			.error-message.show {
+				opacity: 1;
+				visibility: visible;
+				position: relative;
 			}
 
 			.btn-submit {

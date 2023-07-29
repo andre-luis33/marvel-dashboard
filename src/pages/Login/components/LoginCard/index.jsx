@@ -8,24 +8,16 @@ import iconEye from '../../../../assets/images/icon-eye.svg';
 import iconArrowRight from '../../../../assets/images/icon-arrow-right.svg';
 import iconQuestionShield from '../../../../assets/images/icon-question-shield.svg';
 
-export default function LoginCard({ onCardChange }) {
+export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isDisabled, setIsDisabled] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+	const [hasError, setHasError] = useState(false);
 
 
-	function handleInputChange(e) {
-		const { name, value } = e.target;
-
-		if (name === 'email') {
-			setEmail(value);
-		} else if (name === 'password') {
-			setPassword(value);
-		}
-	}
-
-	// useEffect to update isDisabled whenever email or password changes
+	// useEffect to update isDisabled whenever email or password
 	useEffect(() => {
 		setIsDisabled(!(isEmailValid(email) && password));
 	}, [email, password]);
@@ -34,7 +26,16 @@ export default function LoginCard({ onCardChange }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 
+		if(!isEmailValid(email) || !password) {
+			return;
+		}
 
+		setHasError(false);
+		setIsLoading(true);
+
+		setTimeout(() => {
+			onSuccessCardChange();
+		}, 500);
 	}
 
 	return (
@@ -49,20 +50,30 @@ export default function LoginCard({ onCardChange }) {
 
 			<form onSubmit={handleSubmit}>
 				<div className="form-group">
-					<input name='email' className={email && !isEmailValid(email) ? 'is-invalid' : ''} type="text" placeholder='informe seu e-mail' onChange={handleInputChange} value={email} />
+					<input name='email' className={email && !isEmailValid(email) ? 'is-invalid' : ''} type="text" placeholder='informe seu e-mail' onChange={e => setEmail(e.target.value)} value={email} />
 					<img className='floating-icon' src={iconAt} alt="Ícone @" />
 				</div>
 
 				<div className="form-group">
-					<input name='password' type="password" placeholder='informe sua senha' onChange={handleInputChange} value={password} />
+					<input name='password' type="password" placeholder='informe sua senha' onChange={e => setPassword(e.target.value)} value={password} />
 					<button className='floating-icon' type='button'>
 						<img src={iconEye} alt="Ícone de um olho" />
 					</button>
 				</div>
 
-				<button className='btn-submit' disabled={isDisabled}>
-					entrar
-					<img src={iconArrowRight} alt="Ícone de Seta apontando para direita" />
+				<p className={`error-message ${hasError ? 'show' : ''}`}>
+					E-mail ou senha inválidos!
+				</p>
+
+				<button className='btn-submit' disabled={isDisabled || isLoading}>
+					{isLoading ? 
+						'entrando...'
+						:
+						<>
+						entrar
+							<img src={iconArrowRight} alt="Ícone de Seta apontando para direita" />
+						</>
+					}
 				</button>
 			</form>
 
@@ -75,5 +86,6 @@ export default function LoginCard({ onCardChange }) {
 }
 
 LoginCard.propTypes = {
-	onCardChange: propTypes.func.isRequired
+	onCardChange: propTypes.func.isRequired,
+	onSuccessCardChange: propTypes.func.isRequired,
 };

@@ -6,6 +6,7 @@ import building from '../../assets/images/building.png';
 
 import LoginCard from './components/LoginCard';
 import ResetPasswordCard from './components/ResetPasswordCard';
+import AgentSelectCard from './components/AgentSelectCard';
 
 export default function Login() {
 
@@ -21,9 +22,9 @@ export default function Login() {
 					<img src={building} alt="Prédio Colorido" />
 				</div>
 
-				{currentCard === 'login' && <LoginCard onCardChange={() => setCurrentCard('reset-password')}/>}
+				{currentCard === 'login' && <LoginCard onCardChange={() => setCurrentCard('reset-password')} onSuccessCardChange={() => setCurrentCard('agent-select')}/>}
+				{currentCard === 'agent-select' && <AgentSelectCard/>}
 				{currentCard === 'reset-password' && <ResetPasswordCard onCardChange={() => setCurrentCard('login')}/>}
-				
 			</div>
 
 		</PageWrapper>
