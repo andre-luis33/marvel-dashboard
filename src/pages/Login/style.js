@@ -19,7 +19,7 @@ export const PageWrapper = styled.main`
 		}
 		
 		.card-wrapper {
-			max-width: 400px;
+			max-width: 450px;
 
 			background-color: ${({ theme }) => theme.colors.white};
 
@@ -71,6 +71,11 @@ export const PageWrapper = styled.main`
 					&:focus {
 						border-color: ${({ theme }) => theme.colors.blue[600]};
 					}
+
+				}
+
+				input.is-invalid {
+					border-color: red !important;
 				}
 				
 				.floating-icon {
@@ -106,9 +111,16 @@ export const PageWrapper = styled.main`
 				justify-content: center;
 				align-items: center;
 				column-gap: 9px;
+
+				transition: .2s all;
 			}
 
-			.btn-forgot-password {
+			.btn-submit[disabled] {
+				background-color: #C3C3C3;
+				cursor: not-allowed;
+			}
+
+			.btn-bottom {
 				display: flex;
 				align-items: center;
 				justify-content: flex-end;
