@@ -5,8 +5,6 @@ import iconChevronDown from '../../../../assets/images/icon-chevron-down.svg';
 
 export default function AgentSelectCard() {
 
-	fetch('https://gateway.marvel.com/v1/public/characters?apikey=dba785fa1dba1bde6a0089ebe181dcde');
-
 	return (
 		<div className="card-wrapper">
 			<h1 className="title">
