@@ -1,5 +1,5 @@
 import propTypes from 'prop-types';
-import { PageContent, PageWrapper, Sidebar, StyledLink } from './style';
+import { PageContent, PageWrapper, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
 
 import logoDark from '../../assets/images/logo-dark.svg';
 import iconSquares from '../../assets/images/icon-squares.svg';
@@ -8,7 +8,7 @@ import iconLogout from '../../assets/images/icon-logout.svg';
 import iconSearch from '../../assets/images/icon-search.svg';
 import { PageBody } from './style';
 
-export default function Dashboard({ children }) {
+export default function Dashboard({ isLoading, children }) {
 
 	const currentPage = window.location.pathname;
 
@@ -52,6 +52,11 @@ export default function Dashboard({ children }) {
 				</header>
 
 				<PageBody>
+
+					<SpinnerOverlay isLoading={isLoading}>
+						<Spinner />
+					</SpinnerOverlay>
+
 					{children}
 				</PageBody>
 				
@@ -61,5 +66,10 @@ export default function Dashboard({ children }) {
 }
 
 Dashboard.propTypes = {
-	children: propTypes.node.isRequired
+	isLoading: propTypes.bool.isRequired,
+	children: propTypes.node.isRequired,
+};
+
+Dashboard.defaultProps = {
+	isLoading: false,
 };

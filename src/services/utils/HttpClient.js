@@ -1,9 +1,9 @@
-import APIError from '../../errors/APIError';
-import delay from '../../utils/delay';
+import APIError from './APIError';
 
 class HttpClient {
-	constructor(baseUrl) {
+	constructor(baseUrl, apiKey) {
 		this.baseUrl = baseUrl;
+		this.apiKey = apiKey;
 	}
 
 
@@ -39,7 +39,7 @@ class HttpClient {
 
 
 	async makeRequest(path, options) {
-		await delay(1);
+		// await delay(1);
 
 		const headers = new Headers();
 		if(options.body) {
