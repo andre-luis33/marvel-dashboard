@@ -20,7 +20,7 @@ export const PageWrapper = styled.main`
 		
 		.card-wrapper {
 			max-width: 450px;
-			margin-top: 50px;
+			margin-top: 25px;
 
 			background-color: ${({ theme }) => theme.colors.white};
 
