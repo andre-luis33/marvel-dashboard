@@ -9,6 +9,9 @@ import iconSearch from '../../assets/images/icon-search.svg';
 import { PageBody } from './style';
 
 export default function Dashboard({ children }) {
+
+	const currentPage = window.location.pathname;
+
 	return (
 		<PageWrapper>
 
@@ -20,12 +23,12 @@ export default function Dashboard({ children }) {
 				<nav className="menu">
 					<ul>
 						<li>
-							<StyledLink isCurrentPage={true}>
+							<StyledLink to='/home' isCurrentPage={currentPage === '/home'}>
 								<img src={iconSquares} alt="Ícone de Quadrados" />
 								Home
 							</StyledLink>
 
-							<StyledLink>
+							<StyledLink to='/profile' isCurrentPage={currentPage === '/profile'}>
 								<img src={iconUser} alt="Ícone de Usuário" />
 								Perfil
 							</StyledLink>
