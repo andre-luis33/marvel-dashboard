@@ -9,7 +9,7 @@ export default function Router() {
 		<Routes>
 			<Route path='/login' Component={Login} exact />
 			<Route path='/home' Component={Home} exact />
-			<Route path='/profile' Component={Profile} exact />
+			<Route path='/profile/:id' Component={Profile} exact />
 		</Routes>
 	);
 }

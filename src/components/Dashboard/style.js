@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export const PageWrapper = styled.main`
 	display: flex;
 	height: 100vh;
+	overflow: hidden;
 `;
 
 export const StyledLink = styled(Link)`
@@ -63,13 +64,23 @@ export const Sidebar = styled.aside`
 
 export const PageContent = styled.div`
 	width: 100%;
+	max-height: 100vh;
+	overflow-y: scroll;
+
+	padding-top: 60px;
 
 	.search-header {
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		background-color: #fff;
+		
 		height: 60px;
 		width: 100%;
 
 		padding-inline: 38px;
 		border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+		border-left: 1px solid ${({ theme }) => theme.colors.divider};
 
 		display: flex;
 		align-items: center;

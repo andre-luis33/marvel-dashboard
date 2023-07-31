@@ -7,6 +7,9 @@ export const CharactersList = styled.ul`
 	column-gap: 1%;
 
 	list-style: none;
+
+	padding-bottom: 15px;
+	border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
 export const StyledLink = styled(Link)`
@@ -52,3 +55,48 @@ export const Character = styled.li`
 	}
 `;
 
+export const PaginationWrapper = styled.div`
+	padding: 15px;
+
+	display: flex;
+	justify-content: center;
+`;
+
+export const PaginationButton = styled.button`
+	display: flex;
+	align-items: center;
+
+	border: 1px solid #D0D5DD;
+	padding: 10px 16px;
+
+	transition: all .1s;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.colors.divider};
+	}
+
+	&.previous {
+		border-radius: 8px 0 0 8px;
+
+		img {
+			margin-right: 12px;
+		}
+	}
+	
+	&.next {
+		border-radius: 0 8px 8px 0;
+		
+		img {
+			margin-left: 12px;
+			transform: rotate(180deg);
+		}
+	}
+
+	&.selected {
+		background-color: ${({ theme }) => theme.colors.gray.background};
+	}
+
+	&[disabled] {
+		background-color: ${({ theme }) => theme.colors.divider};
+	}
+`;

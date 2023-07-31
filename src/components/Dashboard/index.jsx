@@ -28,7 +28,7 @@ export default function Dashboard({ isLoading, children }) {
 								Home
 							</StyledLink>
 
-							<StyledLink to='/profile' isCurrentPage={currentPage === '/profile'}>
+							<StyledLink to='/profile/me' isCurrentPage={currentPage.includes('/profile')}>
 								<img src={iconUser} alt="Ícone de Usuário" />
 								Perfil
 							</StyledLink>
