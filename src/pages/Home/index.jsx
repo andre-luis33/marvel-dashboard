@@ -84,7 +84,7 @@ export default function Home() {
 					<>
 						{characters.map((character) => (
 							<Character key={character.id}>
-								<StyledLink>
+								<StyledLink to={`/profile/${character.id}`}>
 									<img src={temp} alt="" />
 									<div className="text-wrapper">
 										<h2 className='title'>{character.name}</h2>
