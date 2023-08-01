@@ -27,7 +27,7 @@ export default function Home() {
 
 				setIsLoadingCharacters(true);
 
-				const offset = resultsPerPage * currentPage;
+				const offset = currentPage < 2 ? 0 : resultsPerPage * currentPage;
 
 				const { total, characters } = await MarvelService.getCharacters(offset);
 				setCharacters(characters);
@@ -85,11 +85,11 @@ export default function Home() {
 						{characters.map((character) => (
 							<Character key={character.id}>
 								<StyledLink to={`/profile/${character.id}`}>
-									<img src={temp} alt="" />
+									<img src={character.picture} alt="" />
 									<div className="text-wrapper">
 										<h2 className='title'>{character.name}</h2>
 										<p className="description">
-											{character.name}
+											{character.description || 'Esse personagem é tão brabo, que nem tem descrição'}
 										</p>
 									</div>
 								</StyledLink>

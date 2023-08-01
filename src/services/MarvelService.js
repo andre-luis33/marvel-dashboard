@@ -18,7 +18,7 @@ class MarvelService {
 				id: character.id,
 				name: character.name,
 				description: character.description,
-				picture: `${character.thumbnail.path}?apikey=dba785fa1dba1bde6a0089ebe181dcde`,
+				picture: `${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}`,
 			};
 		});
 
