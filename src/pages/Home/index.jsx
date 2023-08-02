@@ -16,7 +16,7 @@ export default function Home() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalCharacters, setTotalCharacters] = useState(0);
 
-	const resultsPerPage = 10;
+	const resultsPerPage = 11;
 	const paginationList = totalCharacters === 0 ? [] : Array.from({ length: (totalCharacters / resultsPerPage) }, (k, v) => v);
 
 	useEffect(() => {
@@ -87,9 +87,12 @@ export default function Home() {
 								<StyledLink to={`/profile/${character.id}`}>
 									<img src={character.picture} alt="" />
 									<div className="text-wrapper">
-										<h2 className='title'>{character.name}</h2>
+										<h2 className='title'>
+											{character.name.length < 13 ? character.name : `${character.name.substr(0, 13)}...`}
+										</h2>
 										<p className="description">
-											{character.description || 'Esse personagem é tão brabo, que nem tem descrição'}
+											{!character.description && 'Esse personagem é tão brabo, que nem tem descrição...' }
+											{character.description.length < 160 ? character.description : `${character.description.substr(0, 140)}...`}
 										</p>
 									</div>
 								</StyledLink>
@@ -112,15 +115,22 @@ export default function Home() {
 					{[1, 2, 3].includes(currentPage) ?
 
 						<>
-							<PaginationButton className={currentPage === 1 && 'selected'} onClick={() => setCurrentPage(1)}>
-								1
-							</PaginationButton>
+							{currentPage !== 3 && (
+								<PaginationButton className={currentPage === 1 && 'selected'} onClick={() => setCurrentPage(1)}>
+									1
+								</PaginationButton>
+							)}
 							<PaginationButton className={currentPage === 2 && 'selected'} onClick={() => setCurrentPage(2)}>
 								2
 							</PaginationButton>
 							<PaginationButton className={currentPage === 3 && 'selected'} onClick={() => setCurrentPage(3)}>
 								3
 							</PaginationButton>
+							{currentPage === 3 && (
+								<PaginationButton onClick={() => setCurrentPage(4)}>
+									4
+								</PaginationButton>
+							)}
 							<PaginationButton>
 								...
 							</PaginationButton>
@@ -136,6 +146,17 @@ export default function Home() {
 						</>
 						:
 						<>
+							<PaginationButton onClick={() => setCurrentPage(1)}>
+								1
+							</PaginationButton>
+							{currentPage > 10 && (
+								<PaginationButton onClick={() => setCurrentPage(parseInt(currentPage/2))}>
+									{parseInt(currentPage/2)}
+								</PaginationButton>
+							)}
+							<PaginationButton>
+								...
+							</PaginationButton>
 							<PaginationButton onClick={() => setCurrentPage(paginationList[currentPage-1])}>
 								{paginationList[currentPage-1]}
 							</PaginationButton>

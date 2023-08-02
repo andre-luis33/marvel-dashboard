@@ -49,15 +49,10 @@ export const Character = styled.li`
 	max-width: 50%;
 	min-width: 300px;
 
-	overflow: hidden;
-	text-overflow: ellipsis; /* Show ellipsis (...) for the overflow */
-
 	img {
 		width: 83px;
+		/* object-fit: contain; */
 		border-radius: 9px;
-	}
-
-	.description {
 	}
 
 	@media(max-width: 900px) {
