@@ -1,33 +1,61 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { BodyWrapper, ListOfInfo, Overview, ProfileTitle, TabItem, Tabs } from './style';
 
 import Dashboard from '../../components/Dashboard';
+import MarvelService from '../../services/MarvelService';
 
 import temp from '../../Intersect.png';
-
 
 export default function Profile() {
 
 	const [currentTab, setCurrentTab] = useState('overview');
-	const [isLoading, setIsLoading] = useState(false);
+	const [character, setCharacter] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
+
+	const { id } = useParams();
+	
+	useEffect(() => {
+		
+		(async () => {
+
+			try {
+				
+				const character = await MarvelService.getCharacterById(id);
+				setCharacter(character);
+
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
+
+		})();
+
+	}, [id]);
+
 
 	const tabs = [
 		{
-			title: 'overview',
-			label: 'Visão Geral'
+			title: 'overview', label: 'Visão Geral'
 		},
 		{
-			title: 'teams',
-			label: 'Teams'
+			title: 'teams', label: 'Teams'
 		},
 		{
-			title: 'powers',
-			label: 'Powers'
+			title: 'powers', label: 'Powers'
+		},
+		{
+			title: 'species', label: 'Species'
+		},
+		{
+			title: 'authors', label: 'Authors'
 		},
 	];
 
 	return (
-		<Dashboard isLoading={isLoading}>
+		<Dashboard isLoading={isLoading} showSearchBar={false}>
 			
 			<ProfileTitle>
 				<span className='label'>Perfil</span>
@@ -38,7 +66,7 @@ export default function Profile() {
 			<Tabs>
 				{tabs.map(tab => (
 					<TabItem key={tab.title}>
-						<button className={currentTab === tab.title && 'selected'} onClick={() => setCurrentTab(tab.title)}>
+						<button className={currentTab === tab.title ? 'selected' : ''} onClick={() => setCurrentTab(tab.title)}>
 							{tab.label}
 						</button>
 					</TabItem>
@@ -49,15 +77,16 @@ export default function Profile() {
 
 				{currentTab === 'overview' && (
 					<Overview>
-						<img src={temp} alt="" />
+						<img src={character?.picture || temp} alt={character?.name || 'Wolverine'} />
 
 						<div className="text-wrapper">
 							<h2 className='title'>
-								A-Bomb (HAS)
+								{character?.name || 'Carregando...'}
 							</h2>
 
 							<p className="description">
-								Born with super-human senses and the power to heal from almost any wound, Wolverine was captured by a secret Canadian organization and given an unbreakable skeleton and claws. Treated like an animal, it took years for him to control himself. Now, he's a premiere member of both the X-Men and the Avengers.
+								{isLoading && 'Carregando descrição..........'}
+								{!isLoading && character?.description || 'Esse personagem, infelizmente, não possui uma descrição maneira :/'}
 							</p>
 						</div>
 					</Overview>
@@ -72,11 +101,21 @@ export default function Profile() {
 					</ListOfInfo>
 				)}
 
-				{currentTab === 'Powers' && (
+				{currentTab === 'powers' && (
 					<ListOfInfo>
-						<li>Avengers</li>
-						<li>Defenders</li>
-						<li>Fantastic Four</li>
+						<li>MyPower</li>
+					</ListOfInfo>
+				)}
+
+				{currentTab === 'species' && (
+					<ListOfInfo>
+						<li>Mutate</li>
+					</ListOfInfo>
+				)}
+
+				{currentTab === 'authors' && (
+					<ListOfInfo>
+						<li>Stan Lee</li>
 					</ListOfInfo>
 				)}
 

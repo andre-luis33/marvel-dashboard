@@ -51,7 +51,7 @@ export const Character = styled.li`
 
 	img {
 		width: 83px;
-		/* object-fit: contain; */
+		max-height: 120px;
 		border-radius: 9px;
 	}
 

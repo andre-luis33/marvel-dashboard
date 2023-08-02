@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Dashboard from '../../components/Dashboard';
 import { Character, CharactersList, StyledLink, PaginationWrapper, PaginationButton } from './style';
@@ -11,10 +12,17 @@ import iconArrowLeft from '../../assets/images/icon-arrow-left.svg';
 
 export default function Home() {
 
+	const URL = new URLSearchParams(window.location.search);
+
 	const [characters, setCharacters] = useState([]);
 	const [isLoadingCharacters, setIsLoadingCharacters] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalCharacters, setTotalCharacters] = useState(0);
+	const [searchTerm, setSearchTerm] = useState(URL.get('characterName') || '');
+	const [characterNameToSearch, setCharacterNameToSearch] = useState(URL.get('characterName') || '');
+
+	const navigate = useNavigate();
+
 
 	const resultsPerPage = 11;
 	const paginationList = totalCharacters === 0 ? [] : Array.from({ length: (totalCharacters / resultsPerPage) }, (k, v) => v);
@@ -28,8 +36,9 @@ export default function Home() {
 				setIsLoadingCharacters(true);
 
 				const offset = currentPage < 2 ? 0 : resultsPerPage * currentPage;
+				const characterName = characterNameToSearch;
 
-				const { total, characters } = await MarvelService.getCharacters(offset);
+				const { total, characters } = await MarvelService.getCharacters(offset, characterName);
 				setCharacters(characters);
 				setTotalCharacters(total);
 
@@ -42,12 +51,26 @@ export default function Home() {
 
 		})();
 
-	}, [currentPage]);
+	}, [currentPage, characterNameToSearch]);
+
+	
+	function onHeaderSubmit(e) {
+		e.preventDefault();
+		
+		setCharacterNameToSearch(searchTerm);
+		navigate(`/home?characterName=${searchTerm}`);
+	}
+
 
 	const shouldDisplayCharacters = characters.length && !isLoadingCharacters;
 
 	return (
-		<Dashboard isLoading={isLoadingCharacters}>
+		<Dashboard 
+			isLoading={isLoadingCharacters} 
+			onHeaderSubmit={onHeaderSubmit} 
+			headerSearchTerm={searchTerm} 
+			headerSetSearchTerm={setSearchTerm}
+		>
 
 			<CharactersList>
 

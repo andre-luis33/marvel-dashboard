@@ -6,8 +6,11 @@ class MarvelService {
 		this.httpClient = new HttpClient('https://gateway.marvel.com/v1/public');
 	}
 
-	async getCharacters(offset = 0) {
-		const response = await this.httpClient.get(`/characters?apikey=dba785fa1dba1bde6a0089ebe181dcde&limit=11&offset=${offset}`);
+	async getCharacters(offset = 0, characterName) {
+
+		const characterNameParam = characterName ? `&nameStartsWith=${characterName}` : '';
+		
+		const response = await this.httpClient.get(`/characters?apikey=dba785fa1dba1bde6a0089ebe181dcde&limit=11&offset=${offset}${characterNameParam}`);
 		const characters = response?.data?.results;
 		if(!characters) {
 			return false;
@@ -30,6 +33,7 @@ class MarvelService {
 
 
 	async getCharacterById(characterId) {
+
 		const response = await this.httpClient.get(`/characters/${characterId}?apikey=dba785fa1dba1bde6a0089ebe181dcde`);
 		const character = response?.data?.results[0];
 		if(!character) {

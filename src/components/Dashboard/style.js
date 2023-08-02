@@ -88,23 +88,27 @@ export const PageContent = styled.div`
 		form {
 			display: flex;
 			align-items: center;
-			column-gap: 18px;
 
 			height: 100%;
 			width: 100%;
-		}
+			
+			button {
+				padding: 10px 18px 10px 0;
+			}
 
-		input {
-			font-size: 1rem;
-			height: 100%;
-			width: 100%;
-			border: 0;
-			outline: 0;
-
-			&:focus {
-				border-bottom: 1px solid ${({ theme }) => theme.colors.gray[500]};
+			input {
+				font-size: 1rem;
+				height: 100%;
+				width: 100%;
+				border: 0;
+				outline: 0;
+	
+				&:focus {
+					border-bottom: 1px solid ${({ theme }) => theme.colors.gray[500]};
+				}
 			}
 		}
+
 	}
 `;
 
