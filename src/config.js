@@ -1,8 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 const config = {
-	JWT_SECRET: process.env.JWT_SECRET
+	JWT_SECRET: import.meta.env.VITE_JWT_SECRET
 };
 
 export default config;

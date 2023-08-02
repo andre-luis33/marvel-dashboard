@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 import UserMock from '../mocks/UserMock';
 import APIError from './utils/APIError';
@@ -14,15 +14,15 @@ class AuthService {
 			throw new APIError({ status: 400, errorMessage: 'Invalid email or password' });
 		}
 
-		const accessToken = jwt.sign({
-			user: {
-				id: user.id,
-				name: user.name,
-				email: user.email,
-			}
-		}, config.JWT_SECRET, { expiresIn: 3600 });
+		// const accessToken = jwt.sign({
+		// 	user: {
+		// 		id: user.id,
+		// 		name: user.name,
+		// 		email: user.email,
+		// 	}
+		// }, config.JWT_SECRET, { expiresIn: 3600 });
 
-		return accessToken;
+		return 123;
 	}
 
 }

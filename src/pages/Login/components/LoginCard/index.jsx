@@ -8,6 +8,8 @@ import iconEye from '../../../../assets/images/icon-eye.svg';
 import iconArrowRight from '../../../../assets/images/icon-arrow-right.svg';
 import iconQuestionShield from '../../../../assets/images/icon-question-shield.svg';
 
+import AuthService from '../../../../services/AuthService';
+
 export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 
 	const [email, setEmail] = useState('');
@@ -33,8 +35,21 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 		setHasError(false);
 		setIsLoading(true);
 
+		// just to simulate API delay
 		setTimeout(() => {
-			onSuccessCardChange();
+
+			try {
+
+				const accessToken = AuthService.login(email, password);
+				onSuccessCardChange();
+
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
+
+
 		}, 500);
 	}
 
