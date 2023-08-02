@@ -27,6 +27,27 @@ class MarvelService {
 			characters: mappedCharacters
 		};
 	}
+
+
+	async getCharacterById(characterId) {
+		const response = await this.httpClient.get(`/characters/${characterId}?apikey=dba785fa1dba1bde6a0089ebe181dcde`);
+		const character = response?.data?.results[0];
+		if(!character) {
+			return false;
+		}
+
+		console.log(character);
+
+		const mappedCharacter = {
+			...character,
+			id: character.id,
+			name: character.name,
+			description: character.description,
+			picture: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+		};
+		
+		return mappedCharacter;
+	}
 }
 
 export default new MarvelService();
