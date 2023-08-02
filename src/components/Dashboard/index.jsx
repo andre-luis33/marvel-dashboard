@@ -8,9 +8,13 @@ import iconLogout from '../../assets/images/icon-logout.svg';
 import iconSearch from '../../assets/images/icon-search.svg';
 import { PageBody } from './style';
 
-export default function Dashboard({ isLoading, children }) {
+export default function Dashboard({ isLoading, showSearchBar, children }) {
 
 	const currentPage = window.location.pathname;
+
+	function handleSubmit() {
+		
+	}
 
 	return (
 		<PageWrapper>
@@ -46,9 +50,16 @@ export default function Dashboard({ isLoading, children }) {
 			</Sidebar>
 
 			<PageContent>
+
 				<header className='search-header'>
-					<img src={iconSearch} alt="Ícone de Lupa" />
-					<input type="text" placeholder='Busque um agente'/>
+					{showSearchBar && (
+						<form onSubmit={handleSubmit}>
+							<button>
+								<img src={iconSearch} alt="Ícone de Lupa" />
+							</button>
+							<input type="text" placeholder='Busque um agente'/>
+						</form>
+					)}
 				</header>
 
 				<PageBody>
@@ -67,9 +78,11 @@ export default function Dashboard({ isLoading, children }) {
 
 Dashboard.propTypes = {
 	isLoading: propTypes.bool.isRequired,
+	showSearchBar: propTypes.bool.isRequired,
 	children: propTypes.node.isRequired,
 };
 
 Dashboard.defaultProps = {
+	showSearchBar: true,
 	isLoading: false,
 };

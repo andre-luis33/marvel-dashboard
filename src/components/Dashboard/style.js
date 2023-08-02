@@ -76,7 +76,7 @@ export const PageContent = styled.div`
 		background-color: #fff;
 		
 		height: 60px;
-		width: 100%;
+		width: calc(100% - 250px); // sidebar size
 
 		padding-inline: 38px;
 		border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
@@ -84,7 +84,15 @@ export const PageContent = styled.div`
 
 		display: flex;
 		align-items: center;
-		column-gap: 18px;
+
+		form {
+			display: flex;
+			align-items: center;
+			column-gap: 18px;
+
+			height: 100%;
+			width: 100%;
+		}
 
 		input {
 			font-size: 1rem;
