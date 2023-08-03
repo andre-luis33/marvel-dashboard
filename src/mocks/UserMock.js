@@ -4,7 +4,7 @@ class UserMock {
 
 
 	findByEmailAndPassword(email, password) {
-		const user = users.find(user => user.email === email && user.password === password);
+		const user = users.find(user => user.email === email && user.password == password);
 		return user;
 	}
 	

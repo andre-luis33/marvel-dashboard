@@ -107,7 +107,7 @@ export const PageWrapper = styled.main`
 				color: red;
 				background-color: rgba(255,0,0, .2);
 
-				transition: all .5s;
+				transition: all .3s ease-out;
 
 				opacity: 0;
 				visibility: hidden;
@@ -138,6 +138,9 @@ export const PageWrapper = styled.main`
 				column-gap: 9px;
 
 				transition: .2s all;
+
+				position: relative;
+				z-index: 2;
 			}
 
 			.btn-submit[disabled] {

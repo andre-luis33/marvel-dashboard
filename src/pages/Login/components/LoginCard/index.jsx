@@ -14,8 +14,10 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [inputPasswordType, setInputPasswordType] = useState('password');
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const [hasError, setHasError] = useState(false);
 
 
@@ -44,7 +46,15 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 				onSuccessCardChange();
 
 			} catch (error) {
-				console.log(error);
+				
+				setHasError(true);
+
+				if(error.status === 400) {
+					setErrorMessage('E-mail ou senha inválidos!');
+				} else {
+					setErrorMessage('Erro interno no servidor');
+				}
+
 			} finally {
 				setIsLoading(false);
 			}
@@ -70,14 +80,14 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 				</div>
 
 				<div className="form-group">
-					<input name='password' type="password" placeholder='informe sua senha' onChange={e => setPassword(e.target.value)} value={password} />
-					<button className='floating-icon' type='button'>
+					<input name='password' type={inputPasswordType} placeholder='informe sua senha' onChange={e => setPassword(e.target.value)} value={password} />
+					<button className='floating-icon' type='button' onClick={() => setInputPasswordType(prev => prev === 'password' ? 'text' : 'password')}>
 						<img src={iconEye} alt="Ícone de um olho" />
 					</button>
 				</div>
 
 				<p className={`error-message ${hasError ? 'show' : ''}`}>
-					E-mail ou senha inválidos!
+					{errorMessage}
 				</p>
 
 				<button className='btn-submit' disabled={isDisabled || isLoading}>

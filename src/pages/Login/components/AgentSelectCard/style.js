@@ -19,6 +19,8 @@ export const CustomSelect = styled.div`
 		padding-inline: 14px;
 		transition: all .1s;
 
+		border: 2px solid transparent;
+
 		.wrapper {
 			display: flex;
 			align-items: center;
@@ -34,13 +36,14 @@ export const CustomSelect = styled.div`
 		.avatar {
 			height: 24px;
 			width: 24px;
+			border-radius: 50%;
 		}
 	}
 
 	.dropdown-wrapper {
 		margin-top: 5px;
-		opacity: 0;
-		visibility: hidden;
+		opacity: ${({ isActive }) => isActive ? 1 : 0};
+		visibility: ${({ isActive }) => isActive ? 'visible' : 'hidden'};
 
 		position: relative;
 		z-index: 1;
@@ -53,9 +56,22 @@ export const CustomSelect = styled.div`
 		box-shadow: 2px 0px 5px rgba(0,0,0, .2);
 		overflow: hidden;
 
-		.option:hover {
-			background-color: ${({ theme }) => theme.colors.gray[100]};
+		.option {
 			cursor: pointer;
+
+			&:hover {
+				background-color: ${({ theme }) => theme.colors.gray[100]};
+			}
+		}
+
+		.option.selected {
+			background-color: ${({ theme }) => theme.colors.gray[100]};
+			position: relative;
+
+			&::after {
+				content: 'L';
+				transform: scaleX(-1) rotate(-45deg);
+			}
 		}
 	}
 
@@ -63,20 +79,13 @@ export const CustomSelect = styled.div`
 		transition: .2s transform;
 	}
 
-	&:hover, &:focus {
-
-		border-color: ${({ theme }) => theme.colors.gray[500]};
+	
+		/* border-color: ${({ theme }) => theme.colors.gray[500]};
 
 		.arrow-icon {
 			transform: rotate(180deg);
-		}
-		
-		.dropdown-wrapper {
-			margin-top: 5px;
-			opacity: 1;
-			visibility: visible;
-		}
-	}
+		} */
+
 `;
 
 export const BottomWrapper = styled.div`
