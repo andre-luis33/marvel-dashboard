@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { CustomSelect, BottomWrapper } from './style';
 
@@ -12,6 +12,9 @@ export default function AgentSelectCard() {
 
 	const [selectedHero, setSelectedHero] = useState(false);
 	const [isSelectActive, setIsSelectActive] = useState(true);
+	const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+	const navigate = useNavigate();
 
 	const heros = [
 		{
@@ -47,7 +50,18 @@ export default function AgentSelectCard() {
 		setIsSelectActive(false);
 	}
 
-	console.log(selectedHero);
+
+	function handleGetInClick() {
+
+		if(!selectedHero) {
+			setShowErrorMessage(true);
+			return;
+		}
+
+		localStorage.setItem('selectedHero', JSON.stringify(selectedHero));
+		navigate('/home');
+	}
+
 
 	return (
 		<div className="card-wrapper">
@@ -105,9 +119,13 @@ export default function AgentSelectCard() {
 			</CustomSelect>
 
 			<BottomWrapper>
-				<Link className='login-link' to='/home'>
+				<p className={`error-message ${showErrorMessage ? 'show' : ''}`}>
+					Por favor, selecione um agente!
+				</p>
+
+				<button onClick={handleGetInClick}>
 					Entrar
-				</Link>
+				</button>
 			</BottomWrapper>
 
 		</div>

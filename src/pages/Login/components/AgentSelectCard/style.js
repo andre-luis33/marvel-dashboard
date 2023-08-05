@@ -79,20 +79,19 @@ export const CustomSelect = styled.div`
 		transition: .2s transform;
 	}
 
-	
-		/* border-color: ${({ theme }) => theme.colors.gray[500]};
-
-		.arrow-icon {
-			transform: rotate(180deg);
-		} */
 
 `;
 
 export const BottomWrapper = styled.div`
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
+	align-items: flex-end;
 	
-	.login-link {
+	.error-message {
+		width: 100%;
+	}
+
+	button {
 		background-color: ${({ theme }) => theme.colors.blue[800]};
 		color: #fff;
 		padding: 15px;
