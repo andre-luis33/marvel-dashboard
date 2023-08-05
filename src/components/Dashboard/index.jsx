@@ -1,19 +1,24 @@
 import propTypes from 'prop-types';
 import { PageContent, PageWrapper, PageBody, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
 
-import useAuthGuard from '../../hooks/useAuthGuard';
-
 import logoDark from '../../assets/images/logo-dark.svg';
 import iconSquares from '../../assets/images/icon-squares.svg';
 import iconUser from '../../assets/images/icon-user.svg';
 import iconLogout from '../../assets/images/icon-logout.svg';
 import iconSearch from '../../assets/images/icon-search.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, headerSearchTerm, headerSetSearchTerm, children }) {
-
-	useAuthGuard();
 	
 	const currentPage = window.location.pathname;
+	const navigate = useNavigate();
+	
+	function handleLogoutClick() {
+		localStorage.removeItem('accessToken');
+		localStorage.removeItem('selectedHero');
+		navigate('/login');
+	}
+
 
 	return (
 		<PageWrapper>
@@ -38,7 +43,7 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 						</li>
 
 						<li className='logout-item'>
-							<StyledLink to='/login'>
+							<StyledLink onClick={handleLogoutClick}>
 								<img src={iconLogout} alt="Ícone de Logout" />
 								Sair
 							</StyledLink>

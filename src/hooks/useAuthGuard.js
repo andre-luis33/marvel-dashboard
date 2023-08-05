@@ -1,20 +1,26 @@
-import { useNavigate } from 'react-router-dom';
-
 export default function useAuthGuard() {
 	
-	const navigate = useNavigate();
 	const accessToken = localStorage.getItem('accessToken');
+	let isAuth = true;
+	let errorType;
 
 	if(!accessToken) {
-		navigate('/login?error=unlogged');
-		return;
+		isAuth = false;
+		errorType = 'missing-token';
+
+	} else {
+
+		const currentTime = (new Date).getTime();
+		const expirationTime = parseInt(accessToken.split('.').pop());
+	
+		if(currentTime > expirationTime) {
+			isAuth = false;
+			errorType = 'token-expired';
+		}
+		
 	}
+	
 
-	const currentTime = (new Date).getTime();
-	const expirationTime = parseInt(accessToken.split('.').pop());
 
-	if(currentTime > expirationTime) {
-		navigate('/login?error=login-expired');
-	}
-
+	return { isAuth, errorType };
 }

@@ -1,3 +1,6 @@
+/* eslint-disable indent */
+
+
 import { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
@@ -12,6 +15,9 @@ import AuthService from '../../../../services/AuthService';
 
 export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 
+	const URL = new URLSearchParams(window.location.search);
+	const [isFirstRender, setIsFirstRender] = useState(true);
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [inputPasswordType, setInputPasswordType] = useState('password');
@@ -24,7 +30,37 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 	// useEffect to update isDisabled whenever email or password
 	useEffect(() => {
 		setIsDisabled(!(isEmailValid(email) && password));
-	}, [email, password]);
+		
+
+		if(!isFirstRender) {
+			return;
+		}
+
+		setIsFirstRender(true);
+
+		const urlError = URL.get('error');
+		if(!urlError) {
+			return;
+		}
+
+		setHasError(true);
+
+		switch(urlError) {
+			case 'missing-token':
+				setErrorMessage('Você precisa estar logado para acessar essa página!');
+				break;
+
+			case 'token-expired':
+				setErrorMessage('Por favor, faça o login novamente!');
+				break;
+
+			default:
+				setErrorMessage('Algum erro aconteceu, por favor, faça o login!');
+				break;
+		}
+
+
+	}, [email, password, URL, isFirstRender]);
 
 
 	function handleSubmit(e) {
