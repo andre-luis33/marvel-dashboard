@@ -1,7 +1,5 @@
 import UserMock from '../mocks/UserMock';
 
-import config from '../config';
-
 class AuthService {
 
 	login(email, password) {
@@ -10,16 +8,9 @@ class AuthService {
 		if(!user) {
 			throw { status: 400, error: 'Invalid credentials' };
 		}
-
-		// const accessToken = jwt.sign({
-		// 	user: {
-		// 		id: user.id,
-		// 		name: user.name,
-		// 		email: user.email,
-		// 	}
-		// }, config.JWT_SECRET, { expiresIn: 3600 });
-
-		return 'eyWFwafwagwa.eR42141aag498wjwagjwg';
+	
+		const expiresIn = (new Date).getTime() + 3600 * 1000;
+		return `eyWFwafwagwa.eR42141aag498wjwagjwg.${expiresIn}`;
 	}
 
 }

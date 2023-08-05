@@ -40,8 +40,6 @@ class MarvelService {
 			return false;
 		}
 
-		console.log(character);
-
 		const mappedCharacter = {
 			...character,
 			id: character.id,

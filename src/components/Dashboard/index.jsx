@@ -1,15 +1,18 @@
 import propTypes from 'prop-types';
-import { PageContent, PageWrapper, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
+import { PageContent, PageWrapper, PageBody, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
+
+import useAuthGuard from '../../hooks/useAuthGuard';
 
 import logoDark from '../../assets/images/logo-dark.svg';
 import iconSquares from '../../assets/images/icon-squares.svg';
 import iconUser from '../../assets/images/icon-user.svg';
 import iconLogout from '../../assets/images/icon-logout.svg';
 import iconSearch from '../../assets/images/icon-search.svg';
-import { PageBody } from './style';
 
 export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, headerSearchTerm, headerSetSearchTerm, children }) {
 
+	useAuthGuard();
+	
 	const currentPage = window.location.pathname;
 
 	return (

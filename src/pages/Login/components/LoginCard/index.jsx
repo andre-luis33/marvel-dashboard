@@ -43,6 +43,8 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 			try {
 
 				const accessToken = AuthService.login(email, password);
+				localStorage.setItem('accessToken', accessToken);
+
 				onSuccessCardChange();
 
 			} catch (error) {
