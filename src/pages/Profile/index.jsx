@@ -22,7 +22,18 @@ export default function Profile() {
 
 			try {
 				
-				const character = await MarvelService.getCharacterById(id);
+				let requestedCharacterId = id;
+				if(requestedCharacterId === 'me') {
+
+					try {
+						const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
+						requestedCharacterId = selectedHero.id;
+					} catch (error) {
+						console.log(error);
+					}
+				}
+
+				const character = await MarvelService.getCharacterById(requestedCharacterId);
 				setCharacter(character);
 
 			} catch (error) {
