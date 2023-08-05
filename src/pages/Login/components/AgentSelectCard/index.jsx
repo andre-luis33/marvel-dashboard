@@ -11,7 +11,7 @@ import iconUserGray from '../../../../assets/images/icon-user-gray.svg';
 export default function AgentSelectCard() {
 
 	const [selectedHero, setSelectedHero] = useState(false);
-	const [isSelectActive, setIsSelectActive] = useState(true);
+	const [isSelectActive, setIsSelectActive] = useState(false);
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
 
 	const navigate = useNavigate();
