@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 export default function Router() {
 	return (
 		<Routes>
+			<Route path='/' Component={Login} exact />
 			<Route path='/login' Component={Login} exact />
 			<Route path='/home' Component={Home} exact />
 			<Route path='/profile/:id' Component={Profile} exact />

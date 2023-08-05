@@ -6,9 +6,9 @@ import { Character, CharactersList, StyledLink, PaginationWrapper, PaginationBut
 
 import temp from '../../Intersect.png';
 import MarvelService from '../../services/MarvelService';
+import getRandomDescription from '../../utils/getRandomDescription';
 
 import iconArrowLeft from '../../assets/images/icon-arrow-left.svg';
-
 
 export default function Home() {
 
@@ -114,7 +114,7 @@ export default function Home() {
 											{character.name.length < 13 ? character.name : `${character.name.substr(0, 13)}...`}
 										</h2>
 										<p className="description" title={character.description}>
-											{!character.description && 'Esse personagem é tão brabo, que nem tem descrição...' }
+											{!character.description && getRandomDescription() }
 											{character.description.length < 120 ? character.description : `${character.description.substr(0, 120)}...`}
 										</p>
 									</div>

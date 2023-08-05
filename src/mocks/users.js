@@ -11,4 +11,10 @@ export default [
 		email: 'jack@gmail.com',
 		password: 123
 	},
+	{
+		id: 3,
+		name: 'Mike',
+		email: 'mike@gmail.com',
+		password: 'mike'
+	},
 ];

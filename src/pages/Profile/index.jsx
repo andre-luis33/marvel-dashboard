@@ -6,6 +6,7 @@ import { BodyWrapper, ListOfInfo, Overview, ProfileTitle, TabItem, Tabs } from '
 import Dashboard from '../../components/Dashboard';
 import MarvelService from '../../services/MarvelService';
 
+import getRandomDescription from '../../utils/getRandomDescription';
 import temp from '../../Intersect.png';
 
 export default function Profile() {
@@ -97,7 +98,7 @@ export default function Profile() {
 
 							<p className="description">
 								{isLoading && 'Carregando descrição..........'}
-								{!isLoading && character?.description || 'Esse personagem, infelizmente, não possui uma descrição maneira :/'}
+								{!isLoading && character?.description || getRandomDescription()}
 							</p>
 						</div>
 					</Overview>
