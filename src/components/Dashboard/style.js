@@ -8,10 +8,13 @@ export const PageWrapper = styled.main`
 `;
 
 export const StyledLink = styled(Link)`
-	color: ${({ theme, isCurrentPage }) => isCurrentPage ? theme.colors.orange[500] : '#000'};
 
-	img {
-		filter: ${({ isCurrentPage }) => isCurrentPage && 'invert(16%) sepia(95%) saturate(5490%) hue-rotate(10deg) brightness(99%) contrast(103%)'};
+	&.current-page {
+		color: ${({ theme }) => theme.colors.orange[500]};
+	
+		img {
+			filter: invert(16%) sepia(95%) saturate(5490%) hue-rotate(10deg) brightness(99%) contrast(103%);
+		}
 	}
 `;
 

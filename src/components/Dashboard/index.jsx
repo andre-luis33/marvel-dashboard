@@ -13,7 +13,9 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 	const currentPage = window.location.pathname;
 	const navigate = useNavigate();
 	
-	function handleLogoutClick() {
+	function handleLogoutClick(e) {
+		e.preventDefault();
+
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('selectedHero');
 		navigate('/login');
@@ -31,12 +33,14 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 				<nav className="menu">
 					<ul>
 						<li>
-							<StyledLink to='/home' isCurrentPage={currentPage === '/home'}>
+							<StyledLink to='/home' className={currentPage === '/home' ? 'current-page' : ''}>
 								<img src={iconSquares} alt="Ícone de Quadrados" />
 								Home
 							</StyledLink>
+						</li>
 
-							<StyledLink to='/profile/me' isCurrentPage={currentPage.includes('/profile')}>
+						<li>
+							<StyledLink to='/profile/me' className={currentPage.includes('/profile') ? 'current-page' : ''}>
 								<img src={iconUser} alt="Ícone de Usuário" />
 								Perfil
 							</StyledLink>
