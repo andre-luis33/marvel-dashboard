@@ -36,7 +36,7 @@ export default function LoginCard({ onCardChange, onSuccessCardChange }) {
 			return;
 		}
 
-		setIsFirstRender(true);
+		setIsFirstRender(false);
 
 		const urlError = URL.get('error');
 		if(!urlError) {
