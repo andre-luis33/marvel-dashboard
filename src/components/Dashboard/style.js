@@ -20,7 +20,33 @@ export const StyledLink = styled(Link)`
 
 export const Sidebar = styled.aside`
 	width: 250px;
+	flex-shrink: 0;
 	box-shadow: 6px 0px 18px 0px rgba(0, 0, 0, 0.06);
+
+	.btn-close-menu {
+		display: none;
+	}
+
+	@media (max-width: 768px) {
+
+		width: 0;
+		display: none;
+		
+		&.open {
+			width: 100%;
+			display: block;
+		}
+
+		.btn-close-menu {
+			display: block;
+			font-size: 1.5rem;
+			padding: 15px 0 15px 15px;
+
+			position: absolute;
+			top: 2px;
+			right: 15px;
+		}
+	}
 
 	.logo-wrapper {
 		padding-inline: 26px;
@@ -92,6 +118,10 @@ export const PageContent = styled.div`
 		display: flex;
 		align-items: center;
 
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+
 		form {
 			display: flex;
 			align-items: center;
@@ -112,6 +142,20 @@ export const PageContent = styled.div`
 	
 				&:focus {
 					border-bottom: 1px solid ${({ theme }) => theme.colors.gray[500]};
+				}
+			}
+		}
+
+		@media (max-width: 768px) {
+			.btn-open-menu {
+				display: block;
+				padding: 10px 0 10px 10px;
+				display: flex;
+				justify-content: flex-end;
+				width: 100%;
+
+				img {
+					width: 25px;
 				}
 			}
 		}

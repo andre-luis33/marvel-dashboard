@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
+
 import { PageContent, PageWrapper, PageBody, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
 
 import logoDark from '../../assets/images/logo-dark.svg';
@@ -6,10 +9,12 @@ import iconSquares from '../../assets/images/icon-squares.svg';
 import iconUser from '../../assets/images/icon-user.svg';
 import iconLogout from '../../assets/images/icon-logout.svg';
 import iconSearch from '../../assets/images/icon-search.svg';
-import { useNavigate } from 'react-router-dom';
+import iconBars from '../../assets/images/icon-bars.svg';
 
 export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, headerSearchTerm, headerSetSearchTerm, children }) {
 	
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 	const currentPage = window.location.pathname;
 	const navigate = useNavigate();
 	
@@ -25,10 +30,14 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 	return (
 		<PageWrapper>
 
-			<Sidebar>
+			<Sidebar className={isMobileMenuOpen && 'open'}>
 				<div className="logo-wrapper">
 					<img src={logoDark} alt="Logo Pontua" />
 				</div>
+
+				<button className='btn-close-menu' onClick={() => setIsMobileMenuOpen(isMobileMenuOpen ? false : true)}>
+					X
+				</button>
 
 				<nav className="menu">
 					<ul>
@@ -68,6 +77,10 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 							<input type="text" placeholder='Busque um agente' value={headerSearchTerm} onChange={(e) => headerSetSearchTerm(e.target.value)}/>
 						</form>
 					)}
+
+					<button className='btn-open-menu' onClick={() => setIsMobileMenuOpen(isMobileMenuOpen ? false : true)}>
+						<img src={iconBars} alt="Ícone de Menu" />
+					</button>
 				</header>
 
 				<PageBody>

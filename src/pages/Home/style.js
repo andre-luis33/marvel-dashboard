@@ -66,6 +66,10 @@ export const PaginationWrapper = styled.div`
 
 	display: flex;
 	justify-content: center;
+
+	@media (max-width: 870px) {
+		overflow-x: scroll;
+	}
 `;
 
 export const PaginationButton = styled.button`
@@ -91,6 +95,10 @@ export const PaginationButton = styled.button`
 	
 	&.next {
 		border-radius: 0 8px 8px 0;
+
+		@media (max-width: 870px) {
+			min-width: 110px;
+		}
 		
 		img {
 			margin-left: 12px;
