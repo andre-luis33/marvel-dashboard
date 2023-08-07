@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 import { PageContent, PageWrapper, PageBody, Sidebar, StyledLink, Spinner, SpinnerOverlay } from './style';
+
+import { AuthContext } from '../../Router';
 
 import logoDark from '../../assets/images/logo-dark.svg';
 import iconSquares from '../../assets/images/icon-squares.svg';
@@ -15,6 +17,8 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 	
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+	const { setIsAuth } = useContext(AuthContext);
+
 	const currentPage = window.location.pathname;
 	const navigate = useNavigate();
 	
@@ -23,6 +27,8 @@ export default function Dashboard({ isLoading, showSearchBar, onHeaderSubmit, he
 
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('selectedHero');
+
+		setIsAuth(false);
 		navigate('/login');
 	}
 
