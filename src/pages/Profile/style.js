@@ -24,6 +24,10 @@ export const Tabs = styled.ul`
 	display: flex;
 	column-gap: 20px;
 
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+
 	border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
@@ -61,7 +65,12 @@ export const Overview = styled.div`
 	border-radius: 15px;
 
 	display: flex;
-	column-gap: 15px;
+	gap: 15px;
+
+	@media (max-width: 768px) {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 
 	img {
 		height: 150px;
