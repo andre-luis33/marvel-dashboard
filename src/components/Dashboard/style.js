@@ -44,6 +44,10 @@ export const Sidebar = styled.aside`
 			
 			font-size: .85rem;
 			transition: .1s background-color;
+
+			&:not(.current-page) {
+				color: #000;
+			}
 			
 
 			&:hover {
