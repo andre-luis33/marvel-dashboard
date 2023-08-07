@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CustomSelect, BottomWrapper } from './style';
@@ -8,11 +8,16 @@ import { CustomSelect, BottomWrapper } from './style';
 import iconChevronDown from '../../../../assets/images/icon-chevron-down.svg';
 import iconUserGray from '../../../../assets/images/icon-user-gray.svg';
 
+import { AuthContext } from '../../../../Router';
+
 export default function AgentSelectCard() {
 
 	const [selectedHero, setSelectedHero] = useState(false);
 	const [isSelectActive, setIsSelectActive] = useState(false);
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+	const { setIsAuth } = useContext(AuthContext);
+
 
 	const navigate = useNavigate();
 
@@ -52,13 +57,14 @@ export default function AgentSelectCard() {
 
 
 	function handleGetInClick() {
-
 		if(!selectedHero) {
 			setShowErrorMessage(true);
 			return;
 		}
 
 		localStorage.setItem('selectedHero', JSON.stringify(selectedHero));
+		
+		setIsAuth(true);
 		navigate('/home');
 	}
 
@@ -75,7 +81,7 @@ export default function AgentSelectCard() {
 
 			<CustomSelect 
 				tabIndex={1} 
-				isActive={isSelectActive} 
+				className={isSelectActive ? 'is-active' : ''}
 				onMouseEnter={() => setIsSelectActive(true)}
 				onFocus={() => setIsSelectActive(true)} 
 				onMouseLeave={() => setIsSelectActive(false)}

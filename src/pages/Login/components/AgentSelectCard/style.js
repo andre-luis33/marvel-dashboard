@@ -40,10 +40,18 @@ export const CustomSelect = styled.div`
 		}
 	}
 
+	&.is-active {
+		.dropdown-wrapper {
+			opacity: 1;
+			visibility: visible;
+		}
+
+	}
+
 	.dropdown-wrapper {
 		margin-top: 5px;
-		opacity: ${({ isActive }) => isActive ? 1 : 0};
-		visibility: ${({ isActive }) => isActive ? 'visible' : 'hidden'};
+		opacity: 0;
+		visibility: hidden;
 
 		position: relative;
 		z-index: 1;

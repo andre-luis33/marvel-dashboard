@@ -1,6 +1,9 @@
+// import { useAuth } from '../context/AuthContext';
+
 export default function useAuthGuard() {
 	
 	const accessToken = localStorage.getItem('accessToken');
+	
 	let isAuth = true;
 	let errorType;
 
@@ -19,7 +22,6 @@ export default function useAuthGuard() {
 		}
 		
 	}
-	
 
 
 	return { isAuth, errorType };
