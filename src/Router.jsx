@@ -22,8 +22,8 @@ export default function Router() {
 				<Route path='/' Component={Login} exact />
 				<Route path='/login' Component={Login} exact />
 
-				<Route path='/home'        element={isAuth ? <Home /> : <Navigate to={`/?error=${errorType}`} />} exact />
-				<Route path='/profile/:id' element={isAuth ? <Profile /> : <Navigate to={`/?error=${errorType}`} />} exact />
+				<Route path='/home'        element={isAuth ? <Home /> : <Navigate to={`/login?error=${errorType}`} />} exact />
+				<Route path='/profile/:id' element={isAuth ? <Profile /> : <Navigate to={`/login?error=${errorType}`} />} exact />
 				<Route path='*' element={<Navigate to='/' />} />
 			</Routes>
 		</AuthContext.Provider>
