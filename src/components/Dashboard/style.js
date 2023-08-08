@@ -117,6 +117,7 @@ export const PageContent = styled.div`
 
 		display: flex;
 		align-items: center;
+		justify-content: flex-end;
 
 		@media (max-width: 768px) {
 			width: 100%;
@@ -150,9 +151,6 @@ export const PageContent = styled.div`
 			.btn-open-menu {
 				display: block;
 				padding: 10px 0 10px 10px;
-				display: flex;
-				justify-content: flex-end;
-				width: 100%;
 
 				img {
 					width: 25px;

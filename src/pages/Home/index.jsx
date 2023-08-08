@@ -35,8 +35,8 @@ export default function Home() {
 
 				setIsLoadingCharacters(true);
 
-				const offset = currentPage < 2 ? 0 : resultsPerPage * currentPage;
 				const characterName = characterNameToSearch;
+				const offset = characterName ? 0 : (currentPage < 2 ? 0 : resultsPerPage * currentPage);
 
 				const { total, characters } = await MarvelService.getCharacters(offset, characterName);
 				setCharacters(characters);
